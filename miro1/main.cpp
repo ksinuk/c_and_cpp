@@ -29,7 +29,7 @@ int next_point(Point &now , int arrow){
 }
 
 int main(){
-	freopen("input.txt", "r", stdin);
+	freopen("input100.txt", "r", stdin);
     for(int testcase=1 ; testcase<11 ; testcase++){
     	int dumi;cin>>dumi;
     	//cout<<"----------------------------------"<<endl;
@@ -43,25 +43,26 @@ int main(){
         Point now;
         for(int x=0;x<SIZE;x++){
             for(int y=0;y<SIZE;y++)
-                if(map[y][x]=='2') { now.y=y; now.x=x; y=SIZE ; break;}
+                if(map[y][x]=='2') { now.y=y; now.x=x; x=SIZE ; break;}
         }
-        //-------------ÀÔ·Â ¿Ï·á --------------------------
+        //------------- ìž…ë ¥ì™„ë£Œ --------------------------
 
         Point history[1000]; 
         int history_size = 0;
         int arrow = 0; //keypad : e=6 , n=8 , w=4 , s=2 , stop=0
 
         while(out==2){        	
-            if(map[now.y][now.x]=='3') {out=1;break;} //µµÂø 
+            if(map[now.y][now.x]=='3') {out=1;break;} //ë„ì°©
             map[now.y][now.x]='1';
 			
-            int temp=cal_only(map , now); //¹æÇâ °áÁ¤
+            int temp=cal_only(map , now); //ë°©í–¥ ê²°ì • íŒŒíŠ¸
             if(temp==0) { 
 				if( history_size==0){ out=0;break; }
 				now = history[history_size-1];history_size--;
 				arrow=0;
+                continue;
 			}
-            else if(temp!=1) history[history_size++] = now; //cout<<"terminal : "<<now.y<<" , "<<now.x<<endl;
+            else if(temp!=1) history[history_size++] = now;
             arrow= select_direct(map , arrow , now);
             
             next_point(now , arrow);
