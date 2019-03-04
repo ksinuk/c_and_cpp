@@ -27,7 +27,7 @@ public:
         cout<<"arrow : "<<arrow[0]<<" "<<arrow[1]<<" "<<arrow[2]<<" "<<arrow[3]<<endl;
     }
 
-    int map_1(int *map, int size,int dir=-1){
+    int map_1(int *map, int size,int dir=-1,int write_ok = 1){
         if(dir<0){
             for(int i=0;i<4;i++)
                 if(arrow[i]) {dir=i;break; }
@@ -39,13 +39,15 @@ public:
             case 2: start = 0;end = x; break;
             case 3: start = y;end = size-1; break;
         }
-        if(dir%2)
-            for(int my=start;my<=end;my++)
-                *(map+my*size+x) = 1;
-        else
-            for(int mx=start;mx<=end;mx++)
-                *(map+y*size+mx) = 1;
-        
+		if (write_ok) {
+			if (dir % 2)
+				for (int my = start; my <= end; my++)
+					*(map + my * size + x) = 1;
+			else
+				for (int mx = start; mx <= end; mx++)
+					*(map + y * size + mx) = 1;
+		}
+
         return end+1-start;
     }
     int check_line(int *map, int size){
@@ -85,19 +87,14 @@ inline int if_cpu_in(Cpu cpu[] , int cpu_cnt , int thisis , char xy){
 
 int check_dfs(int *map , int size , Cpu cpu[] , int cpu_cnt , int dfs[]){
     for(int c=0;c<cpu_cnt;c++){
-        cpu[c].printf();
         if(cpu[c].arrow[dfs[c]]==0) return -c;
     }
     
     int out=0;
     for(int c=0;c<cpu_cnt;c++){
-cout<<"line : 94"<<endl;
         int temp = cpu[c].check_line(map,size);
-cout<<"line : 96"<<endl;
         if(temp==0) return 1-cpu_cnt;
-cout<<"line : 98"<<endl;
-        out+=cpu[c].map_1(map, size,dfs[c]);
-cout<<"line : 100"<<endl;
+        out+=cpu[c].map_1(map, size,dfs[c],0);
     }
 
     return out;
@@ -118,7 +115,7 @@ int main() {
             for(int j=0;j<size;j++) {   
                 int temp; cin>>temp;
                 *(map+i*size+j)=temp;
-                if(temp==1 and i%(size-1)!=0 && j %(size-1)!=0 ) { 
+                if(temp==1 && i%(size-1)!=0 && j %(size-1)!=0 ) { 
                     cpu[cpu_cnt++].inCpu(i,j);              
                 }
             }
@@ -131,7 +128,7 @@ int main() {
         		if(cpu[c].y==y && *(map+cpu[c].x)==0) {
                     out+=y;
                     for(int wy=0;wy<y;wy++) *(map+wy*size+cpu[c].x) = 1;
-                    cpu[c] = cpu[--cpu_cnt]; 
+                    cpu[c--] = cpu[--cpu_cnt]; 
         		}
         }
         for(int y=size-1;y>=size/2;y--){
@@ -140,39 +137,37 @@ int main() {
         		if(cpu[c].y==y && *(map+cpu[c].x+size*(size-1))==0) {
                     out+=size-y-1;
                     for(int wy=y;wy<size;wy++) *(map+wy*size+cpu[c].x) = 1;
-                    cpu[c] = cpu[--cpu_cnt]; 
+                    cpu[c--] = cpu[--cpu_cnt]; 
         		}
         }
         for(int x=1;x<(size+1)/2;x++){
-            if(if_cpu_in(cpu , cpu_cnt , x-1 , 'y' )) break;     
+            if(if_cpu_in(cpu , cpu_cnt , x-1 , 'x' )) break;     
             for(int c=0;c<cpu_cnt;c++)
         		if(cpu[c].x==x && *(map+size*cpu[c].y)==0) {
                     out+=x;
                     for(int wx=0;wx<x;wx++) *(map+wx+size*cpu[c].y) = 1;
-                    cpu[c] = cpu[--cpu_cnt]; 
+                    cpu[c--] = cpu[--cpu_cnt]; 
         		}
         }
         for(int x=size-1;x>=size/2;x--){
-            if(if_cpu_in(cpu , cpu_cnt , x+1 , 'y' )) break;       
+            if(if_cpu_in(cpu , cpu_cnt , x+1 , 'x' )) break;       
             for(int c=0;c<cpu_cnt;c++)
         		if(cpu[c].x==x && *(map+cpu[c].y*size+(size-1))==0) {
                     out+=size-x-1;
                     for(int wx=x;wx<size;wx++) *(map+wx+size*cpu[c].y) = 1;
-                    cpu[c] = cpu[--cpu_cnt]; 
+                    cpu[c--] = cpu[--cpu_cnt]; 
         		}
         }
         //-------- 전처리 완료 -------------------------------------------
-        int arrow_cnt=cpu_cnt;
         while(1){
             int case_1=0;
-            for(int c=0;c<arrow_cnt;c++){
+            for(int c=0;c<cpu_cnt;c++){
                 int temp = cpu[c].check_line(map,size);
                 if(temp==0) {
                     cpu[c--] = cpu[--cpu_cnt];
                 }
                 else if(temp==1){
                     case_1++;
-                    arrow_cnt = c;
                     out+=cpu[c].map_1(map, size);
                     cpu[c--] = cpu[--cpu_cnt];
                 } 
