@@ -27,7 +27,7 @@ public:
         cout<<"arrow : "<<arrow[0]<<" "<<arrow[1]<<" "<<arrow[2]<<" "<<arrow[3]<<endl;
     }
 
-    int map_1(int *map, int size,int dir=-1,int write_ok = 1){
+    int map_1(int *map, int size,int dir=-1){
         if(dir<0){
             for(int i=0;i<4;i++)
                 if(arrow[i]) {dir=i;break; }
@@ -39,16 +39,14 @@ public:
             case 2: start = 0;end = x; break;
             case 3: start = y;end = size-1; break;
         }
-		if (write_ok) {
-			if (dir % 2)
-				for (int my = start; my <= end; my++)
-					*(map + my * size + x) = 1;
-			else
-				for (int mx = start; mx <= end; mx++)
-					*(map + y * size + mx) = 1;
-		}
+        if (dir % 2)
+            for (int my = start; my <= end; my++)
+                *(map + my * size + x) = 1;
+        else
+            for (int mx = start; mx <= end; mx++)
+                *(map + y * size + mx) = 1;
 
-        return end+1-start;
+        return end-start;
     }
     int check_line(int *map, int size){
         int temp=1 ,out=0;
@@ -86,18 +84,22 @@ inline int if_cpu_in(Cpu cpu[] , int cpu_cnt , int thisis , char xy){
 }
 
 int check_dfs(int *map , int size , Cpu cpu[] , int cpu_cnt , int dfs[]){
-    for(int c=0;c<cpu_cnt;c++){
-        if(cpu[c].arrow[dfs[c]]==0) return -c;
-    }
+    int *nowmap = new int[size*size];
+    for(int y=0;y<size;y++)
+        for(int x=0;x<size;x++) *(nowmap+size*y+x) = *(map+size*y+x);
     
-    int out=0;
+    int out=0,cut=0;
     for(int c=0;c<cpu_cnt;c++){
-        int temp = cpu[c].check_line(map,size);
-        if(temp==0) return 1-cpu_cnt;
-        out+=cpu[c].map_1(map, size,dfs[c],0);
+        int temp = cpu[c].check_line(nowmap,size);
+        if(temp==0 || cpu[c].arrow[dfs[c]]==0){
+            cut++;
+            continue;
+        }
+        out+=cpu[c].map_1(nowmap, size,dfs[c]);
     }
 
-    return out;
+    delete [] nowmap;
+    return out*20+cut;
 }
 
 int main() {
@@ -125,16 +127,16 @@ int main() {
         for(int y=1;y<(size+1)/2;y++){
             if(if_cpu_in(cpu , cpu_cnt , y-1 , 'y' )) break;   
             for(int c=0;c<cpu_cnt;c++)
-        		if(cpu[c].y==y && *(map+cpu[c].x)==0) {
+        		if(cpu[c].y==y && *(map+cpu[c].x)==0 && (cpu[c].x>=y && cpu[c].x<=size-1-y) ) {
                     out+=y;
                     for(int wy=0;wy<y;wy++) *(map+wy*size+cpu[c].x) = 1;
                     cpu[c--] = cpu[--cpu_cnt]; 
         		}
         }
-        for(int y=size-1;y>=size/2;y--){
+        for(int y=size-2;y>=size/2;y--){
             if(if_cpu_in(cpu , cpu_cnt , y+1 , 'y' )) break;       
             for(int c=0;c<cpu_cnt;c++)
-        		if(cpu[c].y==y && *(map+cpu[c].x+size*(size-1))==0) {
+        		if(cpu[c].y==y && *(map+cpu[c].x+size*(size-1))==0 && (cpu[c].x<=y && cpu[c].x>=size-1-y)) {
                     out+=size-y-1;
                     for(int wy=y;wy<size;wy++) *(map+wy*size+cpu[c].x) = 1;
                     cpu[c--] = cpu[--cpu_cnt]; 
@@ -143,16 +145,16 @@ int main() {
         for(int x=1;x<(size+1)/2;x++){
             if(if_cpu_in(cpu , cpu_cnt , x-1 , 'x' )) break;     
             for(int c=0;c<cpu_cnt;c++)
-        		if(cpu[c].x==x && *(map+size*cpu[c].y)==0) {
+        		if(cpu[c].x==x && *(map+size*cpu[c].y)==0 && (cpu[c].y>=x && cpu[c].y<=size-1-x)) {
                     out+=x;
                     for(int wx=0;wx<x;wx++) *(map+wx+size*cpu[c].y) = 1;
                     cpu[c--] = cpu[--cpu_cnt]; 
         		}
         }
-        for(int x=size-1;x>=size/2;x--){
+        for(int x=size-2;x>=size/2;x--){
             if(if_cpu_in(cpu , cpu_cnt , x+1 , 'x' )) break;       
             for(int c=0;c<cpu_cnt;c++)
-        		if(cpu[c].x==x && *(map+cpu[c].y*size+(size-1))==0) {
+        		if(cpu[c].x==x && *(map+cpu[c].y*size+(size-1))==0 && (cpu[c].y<=x && cpu[c].y>=size-1-x)) {
                     out+=size-x-1;
                     for(int wx=x;wx<size;wx++) *(map+wx+size*cpu[c].y) = 1;
                     cpu[c--] = cpu[--cpu_cnt]; 
@@ -176,16 +178,34 @@ int main() {
         }
         //for(int c=0;c<cpu_cnt;c++) cpu[c].printf();
         // --------- 방향 계산 완료 ------------------------
-        //cout<<"cpu_cnt : "<<cpu_cnt<<endl;
+        // cout<<"cpu_cnt : "<<cpu_cnt<<" , out : "<<out<<endl;
+        // cout<<"------------------"<<endl;
+        // for(int y=0;y<size;y++){
+        //     for(int x=0;x<size;x++){
+        //         cout<<*(map+y*size+x);
+        //     }
+        //     cout<<endl;
+        // }
+        // cout<<"------------------"<<endl;
+
+        int cut = 20;
         if(cpu_cnt){
             int *dfs= new int[cpu_cnt];
+            for(int i=0;i<cpu_cnt;i++) *(dfs+i) = 0;
+
             int min = 12*size , while_now=1;
             while(while_now){
                 int c_fisrt = cpu_cnt-1;
                 int temp = check_dfs(map , size , cpu , cpu_cnt , dfs);
-                
-                if(temp>0 && min>temp) min = temp;
-                else c_fisrt = -temp;
+                if(temp>0){
+                    int temp_out = temp/20;
+                    int temp_cut = temp-temp_out*20;
+                    if(cut>temp_cut){
+                        cut = temp_cut;
+                        min = temp_out;
+                    }
+                    else if(cut==temp_cut && min>temp_out) min = temp_out;
+                }
                 
                 for(int i=c_fisrt;i>=0;i--){
                     if(dfs[i]!=3){
