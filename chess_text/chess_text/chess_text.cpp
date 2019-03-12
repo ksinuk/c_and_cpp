@@ -1,9 +1,11 @@
 ﻿#include "pch.h"
+#include "Map.h"
 #include <iostream>
 #define MAXHISTORY 300
 using namespace std;
 
 string map_out[8][8];
+
 int history[MAXHISTORY][3];
 
 void clear_map() {

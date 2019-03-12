@@ -1,79 +1,58 @@
 #include <iostream>
+#include "pch.h"
 using namespace std;
 
-enum Color {black=0,white=1};
+extern string map_out[8][8];
 
-class Point {
-public:
-	int x,y;
-	Point(int xin, int yin) {
-		x = xin;
-		y = yin;
-	}
-	Point operator-(Point p) {
-		return Point(x - p.x, y - p.y);
-	}
-	bool operator==(Point p) {
-		if (x == p.x && y == p.y) return true;
-		else return false;
-	}
-
-	void abs() {
-		x = (x > 0) ? x : -x;
-		y = (y > 0) ? y : -y;
-	}
-	int move(Point next) {
-		if (next.x < 0 || next.y < 0 || next.x >= 8 || next.y >= 8) return -1;
-		x = next.x;
-		y = next.y;
-		return 0;
-	}
-};
-
-class Piece {
-protected:
-	Point point = Point(0, 0);
-	Color color;
-	Piece() {}
-};
-
-class King:public Piece {
-	int first_move;
-	King(Color colorin) {
+Piece::Piece(Color colorin, Piece_type typein , int y,int x) {
 		first_move = 0;
 		color = colorin;
-		if (color == black) point = Point(4,0);
-		else point = Point(4, 7);
-	}
-	int move(Point next) {//캐슬링은 별도의 함수를 사용한다.
-		if (point == next) return -1;
-		Point temp = point-next;
-		temp.abs();
+		point = Point(y, x);
 
-		if (temp.x > 1 || temp.y>1) return -1;
-		else {
-			first_move++;
-			point.move(next);
-			return 0;
-		}
 	}
-};
 
-class Queen :public Piece {
-	Queen(Color colorin) {
-		color = colorin;
-		if (color == black) point = Point(3, 0);
-		else point = Point(3, 7);
-	}
-	int move(Point next) {
-		if (point == next) return -1;
-		Point temp = point - next;
-		temp.abs();
+int Piece::move(Point next) {//캐슬링은 별도의 함수를 사용한다.
+	if (point == next) return -1;
+	Point temp = next - point;
 
-		if (temp.x!=temp.y && temp.x!=0 && temp.y!=0) return -1;
-		else {
-			point.move(next);
-			return 0;
-		}
+	switch (type)
+	{
+	case king:
+		if (int_abs(temp.x)>2 || int_abs(temp.y) > 2) return -1;
+		break;
+	case queen:
+		if (int_abs(temp.x) != int_abs(temp.y) && temp.x != 0 && temp.y != 0) return -1;
+		break;
+	case rook:
+		if (int_abs(temp.x) != int_abs(temp.y)) return -1;
+		break;
+	case bishop:
+		if (temp.x != 0 && temp.y != 0) return -1;
+		break;
+	case night:
+		if (int_abs(temp.x)==2 && int_abs(temp.y) ==1 || int_abs(temp.x) == 1 && int_abs(temp.y) == 2) return -1;
+		break;
+	default:
+		break;
 	}
-};
+	int dx= temp.x, dy = temp.y;
+	if (type != night) {
+		dx = ((temp.x == 0) ? 0 : (temp.x / int_abs(temp.x)));
+		dy = ((temp.y == 0) ? 0 : (temp.y / int_abs(temp.y)));
+	}
+
+	Point d = Point(dx, dy);
+
+	Point start = Point(point.x + dx, point.y + dy);
+	while (start != next) {
+		if (map_out[start.y][start.x] != "  ") return -1;
+		start = start + d;
+	}
+
+	first_move++;
+	point.move(next);
+	return 0;
+}
+
+
+
