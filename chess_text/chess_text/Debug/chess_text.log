@@ -1,3 +1,9 @@
-﻿  pch.cpp
+﻿  Chess_Piece.cpp
+c:\users\student\desktop\c_cpp\chess_text\chess_text\chess_piece.cpp(1): fatal error C1083: 미리 컴파일된 헤더 파일을 열 수 없습니다. 'Debug\chess_text.pch': No such file or directory
   chess_text.cpp
-  chess_text.vcxproj -> C:\Users\student\Desktop\c_cpp\chess_text\chess_text\Debug\chess_text.exe
+c:\users\student\desktop\c_cpp\chess_text\chess_text\chess_text.cpp(1): fatal error C1083: 미리 컴파일된 헤더 파일을 열 수 없습니다. 'Debug\chess_text.pch': No such file or directory
+  Map.cpp
+c:\users\student\desktop\c_cpp\chess_text\chess_text\map.cpp(1): fatal error C1083: 미리 컴파일된 헤더 파일을 열 수 없습니다. 'Debug\chess_text.pch': No such file or directory
+  sub_func.cpp
+c:\users\student\desktop\c_cpp\chess_text\chess_text\sub_func.cpp(1): fatal error C1083: 미리 컴파일된 헤더 파일을 열 수 없습니다. 'Debug\chess_text.pch': No such file or directory
+  코드를 생성하고 있습니다...

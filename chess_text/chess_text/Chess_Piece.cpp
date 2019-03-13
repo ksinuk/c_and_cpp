@@ -1,12 +1,16 @@
-#include <iostream>
-#include "pch.h"
-using namespace std;
+#include "pch.hpp"
 
 extern string map_out[8][8];
 
-Piece::Piece(Color colorin, Piece_type typein , int y,int x) {
+Piece::Piece() {
+	first_move = 0;
+	color = none;
+	point = Point(-1, -1);
+}
+Piece::Piece(Color colorin, Piece_type typein, int y,int x) {
 		first_move = 0;
 		color = colorin;
+		type = typein;
 		point = Point(y, x);
 
 	}
@@ -53,6 +57,5 @@ int Piece::move(Point next) {//캐슬링은 별도의 함수를 사용한다.
 	point.move(next);
 	return 0;
 }
-
 
 

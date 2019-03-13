@@ -1,10 +1,4 @@
-#include <iostream>
-#include "pch.h"
-using namespace std;
-
-inline int int_abs(int x) {
-	return (x < 0) ? -x : x;
-}
+#include "pch.hpp"
 
 Point::Point(int yin, int xin) {
 	x = xin;

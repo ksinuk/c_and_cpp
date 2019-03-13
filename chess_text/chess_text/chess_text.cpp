@@ -1,8 +1,5 @@
-﻿#include "pch.h"
-#include "Map.h"
-#include <iostream>
-#define MAXHISTORY 300
-using namespace std;
+﻿#include "pch.hpp"
+#include "Map.hpp"
 
 string map_out[8][8];
 
