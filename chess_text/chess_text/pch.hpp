@@ -26,18 +26,11 @@ public:
 	int move(Point next);
 };
 
-class Piece {//폰을 제외한 기물
-protected:
-	Point point = Point(0, 0);
-	Color color;
-	Piece_type type;
-
-	int first_move;
-public:
-	Piece();
-	Piece(Color colorin, Piece_type typein, int y, int x);
-	int move(Point next);//캐슬링은 별도의 함수를 사용한다.
-};
+inline Color turn_color(Color color) {
+	if (color == black) return white;
+	else if (color == white) return black;
+	else return color;
+}
 
 
 

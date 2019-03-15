@@ -1,38 +1,41 @@
 ﻿#define DEBUG 
 #include <iostream>
-using namespace std;
+//using namespace std;
 
-int cal() {
-	int size;
-	cin >> size;
-	char table[1001][1001];
-	int xli[1001] = { 0 };
-	int yli[1001] = { 0 };
+char str[1002];
+
+int cal(bool *table) {
+	int size, ys=0;
+	scanf("%d",&size);
+	bool xli[1001] = { 0 };
+	bool yli[1001] = { 0 };
+
 
 	for (int y = 0; y < size; y++) {
-		char str[1002];
-		cin >> str;
+		scanf("%s", str);
 		for (int x = 0; x < size; x++) {
-			char c=str[x];
-			if (c == 'B') {
-				table[y][x] = 1;
-				xli[x]++;
-				yli[y]++;
+			if (str[x] == 'B') {
+				table[ys++] = 1;
+				xli[x]^=1;
+				yli[y] ^= 1;
 			}
-			else table[y][x] = 0;
+			else table[ys++] = 0;
 		}
 	}
-		
+
 	int out = 0;
-	for (int y = 0; y < size; y++)
+	bool temp;
+	ys = 0;
+	for (int y = 0; y < size; y++) {
+		int yy = yli[y];
 		for (int x = 0; x < size; x++) {
-			int temp = yli[y] + xli[x] - table[y][x];
-			if (temp % 2) out++;
+			temp = yy ^ xli[x] ^ table[ys++];
+			if (temp) out++;
 		}
+	}
 
 	return out;
 }
-
 
 
 int main()
@@ -42,13 +45,16 @@ int main()
 	freopen("sample_input.txt", "r", stdin);
 #endif // DEBUG
 
+	bool *table = new bool[1000001];
 	
-	cin >> T;
+	
+	scanf("%d",&T);
 	for (int test_case = 1; test_case <= T; ++test_case)
 	{
-		int out = cal();
-		cout << '#' << test_case << ' ' << out << endl;
+		printf("#%d %d\n", test_case, cal(table));
 	}
+
+	delete[] table;
 #ifdef DEBUG
 	while (1) {}
 #endif // DEBUG

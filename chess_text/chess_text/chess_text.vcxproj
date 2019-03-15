@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="pch.hpp" />
+    <ClInclude Include="Piece.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chess_Piece.cpp" />

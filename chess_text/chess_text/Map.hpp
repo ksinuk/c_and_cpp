@@ -3,11 +3,11 @@
 
 class Map
 {
-protected:
-
-	int color[2][8][8];
-	string out[8][8];
 public:
+	Piece map[8][8];
+	int color[3][8][8];
+	string out[8][8];
+
 	Map();
 	~Map();
 };
