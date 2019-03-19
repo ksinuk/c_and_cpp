@@ -2,7 +2,7 @@
 #include "Map.hpp"
 
 string map_out[8][8];
-
+Map map;
 int history[MAXHISTORY][3];
 
 void clear_map() {

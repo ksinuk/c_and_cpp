@@ -29,13 +29,7 @@ public:
 inline Color turn_color(Color color) {
 	if (color == black) return white;
 	else if (color == white) return black;
-	else return color;
-}
-
-
-
-inline int int_abs(int x) {
-	return (x < 0) ? -x : x;
+	else return none;
 }
 
 #endif //PCH_H
