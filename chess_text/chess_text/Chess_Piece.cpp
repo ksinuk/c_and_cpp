@@ -8,24 +8,30 @@ Piece::Piece() {
 	color = none;
 	point = Point(-1, -1);
 }
-Piece::Piece(Color colorin, Piece_type typein, int y,int x) {
+Piece::Piece(Color colorin, Piece_type typein, int y,int x , Arrow arrowin) {
 		first_move = 0;
 		color = colorin;
 		type = typein;
 		point = Point(y, x);
+		arrow = arrowin;
+
+		en_passant = 0;
 
 	}
 
-int Piece::move(Point next , Map &map) {//캐슬링은 별도의 함수를 사용한다.
+Color Piece::iscolor() { return color; }
+
+int Piece::move(Point next , Map &map) {//캐슬링 , 앙파상은 별도의 함수를 사용한다.
 	if (point == next) return -1;
 	Point temp = next - point;
-	Color you_color;
+	Color you_color = turn_color(color);
+
+	if (map.map[next.y][next.x] != NULL && ((map.map[next.y][next.x]->iscolor()) == color)) return -1;
 
 	switch (type)
 	{
 		case king:
 			if (abs(temp.x)>2 || abs(temp.y) > 2) return -1;
-			you_color = turn_color(color);
 			if (map.color[you_color][next.y][next.x]) return -1;
 			break;
 		case queen:
@@ -39,6 +45,13 @@ int Piece::move(Point next , Map &map) {//캐슬링은 별도의 함수를 사용한다.
 			break;
 		case night:
 			if (abs(temp.x)==2 && abs(temp.y) ==1 || abs(temp.x) == 1 && abs(temp.y) == 2) return -1;
+			break;
+		case pawn:
+			if (arrow == up && temp.y < 0 || arrow == down && temp.y > 0) return -1;
+			if (!(abs(temp.y) == 2 && temp.x == 0 || abs(temp.y) == 1 && abs(temp.x) <= 1)) return -1;
+			if (temp.x == 0 && map.map[next.y][next.x] != NULL) return -1;
+			if (abs(temp.y) == 2 && (first_move != 0 || map.map[next.y-(temp.y)/2][next.x] != NULL)) return -1;
+			if (temp.x != 0 && map.map[next.y][next.x] == NULL) return (this->enpassant());
 			break;
 		default:
 			break;
@@ -92,3 +105,7 @@ int Piece::castling(Piece &rook, Map &map) { //킹 piece에서 호출
 	return 0;
 }
 
+int Piece::enpassant() {
+	if (en_passant == 0) return -1;
+
+}

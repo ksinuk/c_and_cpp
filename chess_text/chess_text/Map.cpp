@@ -9,7 +9,6 @@ Map::Map()
 			map[y][x] = NULL;	
 			color[0][y][x] = 0;
 			color[1][y][x] = 0;
-			out[y][x] = "  ";
 		}
 }
 

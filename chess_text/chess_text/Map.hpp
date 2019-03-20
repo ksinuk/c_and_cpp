@@ -8,7 +8,6 @@ class Map
 public:
 	Piece *map[8][8];
 	int color[3][8][8];
-	string out[8][8];
 
 	Map();
 	~Map();

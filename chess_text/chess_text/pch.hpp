@@ -13,7 +13,8 @@
 using namespace std;
 
 enum Color { black = 1, white = 2 , none=0 };
-enum Piece_type { king = 0, queen, rook, bishop, night, other };
+enum Piece_type { king = 0, queen, rook, bishop, night, pawn , other };
+enum Arrow {up,down};
 
 class Point {
 public:

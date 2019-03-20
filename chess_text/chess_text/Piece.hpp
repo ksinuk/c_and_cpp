@@ -9,27 +9,21 @@ protected:
 	Point point = Point(0, 0);
 	Color color;
 	Piece_type type;
-
 	int first_move;
+
+	int en_passant;
+	Arrow arrow;
+
 public:
 	Piece();
-	Piece(Color colorin, Piece_type typein, int y, int x);
+	Piece(Color colorin, Piece_type typein, int y, int x, Arrow arrowin);
 	int move(Point next, Map &map);//캐슬링은 별도의 함수를 사용한다.
 	int castling(Piece &rook, Map &map);
-};
-
-class Pawn {
-protected:
-	Point point = Point(0, 0);
-	Color color;
-	int first_move;
-	int en_passant;
-
-	Pawn();
-	int move(Point next);
 	int Promotion();
+	int enpassant();
 
-
+	Color iscolor();
+ 
 };
 
 
