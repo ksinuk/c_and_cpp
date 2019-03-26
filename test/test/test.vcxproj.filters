@@ -36,6 +36,24 @@
     <ClCompile Include="예산.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="단지_번호붙이기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="주사위_던지기2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="최소의_합.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="건물세우기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="더하기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="건물세우기_재귀.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="최소비용으로포장다시하기_input.txt">
@@ -54,6 +72,21 @@
       <Filter>리소스 파일</Filter>
     </Text>
     <Text Include="미로.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="단지_번호붙이기.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="주사위_던지기2.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="최소의_합.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="건물세우기.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="더하기.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

@@ -2,157 +2,73 @@
 //#define DEBUG
 #include <iostream>
 
-struct Point {
-	int x , y , dist;
-};
-
-inline void copy_point(Point &from , Point &to) {
-	to.y = from.y;
-	to.x = from.x;
-	to.dist = from.dist;
+inline void swap(int &a , int &b) {
+	int temp = a;
+	a = b;
+	b = temp;
 }
 
-bool equal_point(Point a , Point b) {
-	if(a.x==b.x && a.y==b.y) return true;
-	return false;
+int cal_main(int size) {
+	int map[10][10] = {0};
+	int stack[10] = {0};
+	int history[10] = {0};
+	int sum[10] = {0};
+	
+
+	for(int y = 0; y<size; y++)
+		for(int x = 0; x<size; x++) scanf("%d" , &map[y][x]);
+
+	int min = 0;
+	for(int i = 0; i<size; i++) min += map[i][i];
+
+	for(int i = 0; i<size; i++) {
+		stack[i] = i;
+		history[i] = i;
+	}
+	int index = 0;
+	
+
+	while(index>=0) {
+		sum[index] = map[index][stack[index]]+((index==0) ? 0 : sum[index-1]);
+		if(index==size-1) {
+			min = (sum[index]<min) ? sum[index] : min;
+		}
+
+		if(index!=size-1&&sum[index]<=min) {
+			index++;
+		}
+		else {
+			while(index>=0&&history[index]==size-1) {
+				swap(stack[index] , stack[history[index]]);
+				history[index--] = index;
+			}
+			if(index<0) break;
+
+			swap(stack[index] , stack[history[index]]);
+			history[index]++;
+			swap(stack[index] , stack[history[index]]);
+		}
+	}
+
+	return min;
 }
 
-int cal_main(int xsize,int ysize) {
-	Point start = {0,0,1}; scanf("%d" , &(start.x)); scanf("%d" , &(start.y));
-	Point end = {0,0,1}; scanf("%d" , &(end.x)); scanf("%d" , &(end.y));
-
-	int map[102][102];
-	const int block = 1;
-	for(int y = 0; y<ysize+2; y++) {
-		map[y][0] = block;
-		map[y][xsize+1] = block;
-	}
-	for(int x = 0; x<xsize+2; x++) {
-		map[0][x] = block;
-		map[ysize+1][x] = block;
-	}
-
-	for(int y = 1; y<=ysize; y++) {
-		char temp;
-		scanf("%c" , &temp);
-		for(int x = 1; x<=xsize; x++) {
-			scanf("%c" , &temp);
-			map[y][x] = (temp-'0')*block;
-		}
-	}
-
-	int dx[4] = {0,0,1,-1};
-	int dy[4] = {1,-1,0,0};
-	Point stack[10000];
-	copy_point(start , stack[0]);
-	Point now;
-	int front = 0 , last=1;
-	int dist = 0;
-
-	while(front<last) {
-		copy_point(stack[front++] , now);
-
-		map[now.y][now.x] = now.dist;
-
-		if(equal_point(end , now)) {
-			return dist-1;
-		}
-		
-		int arrows[4] = {0} , cnt_arrow = 0;
-		for(int i = 0; i<4; i++) 
-			if(map[now.y+dy[i]][now.x+dx[i]]==0) {
-				arrows[cnt_arrow++] = i;
-			}
-		
-		if(cnt_arrow==0) {
-			if(front<last) copy_point(stack[front++] , now);
-			else return -1;
-			dist = map[now.y][now.x];
-			continue;
-		}
-
-		Point pre; copy_point(now , pre);
-
-		for(int i = 0; i<cnt_arrow; i++) {
-			copy_point(pre,now);
-			dist = map[now.y][now.x];
-			int arrow = arrows[i];
-
-			while(1) {
-				now.y += dy[arrow];
-				now.x += dx[arrow];
-
-				if(equal_point(end , now)) {
-					int ok = 1;
-					for(int j = front; j<last; j++) {
-						if(equal_point(stack[j] , now)) {
-							if(stack[j].dist>dist) stack[j].dist = dist+1;
-							ok = 0;
-							break;
-						}
-					}
-					if(ok) copy_point(now , stack[last++]);
-					break;
-				}
-
-				arrow = 0;
-				int cnt = 0;
-				for(int i = 0; i<4; i++)
-					if(map[now.y+dy[i]][now.x+dx[i]]==0) {
-						arrow = i;
-						cnt++;
-					}
-				if(cnt==0) {
-					break;
-				}
-				else if(cnt>1) {
-					int ok = 1;
-					for(int j = front; j<last; j++) {
-						if(equal_point(stack[j] , now)) {
-							if(stack[j].dist>dist) stack[j].dist = dist+1;
-							ok = 0;
-							break;
-						}
-					}
-					if(ok) copy_point(now , stack[last++]);
-					break;
-				}
-
-				if(map[now.y][now.x]==0||map[now.y][now.x]>dist) map[now.y][now.x] = ++dist;
-			}
-		}
-
-		int min_i = front;
-		if(front==last) return -1;
-		int min = map[stack[front].y][stack[front].x];
-		for(int i = front+1; i<last; i++) {
-			if(min>map[stack[i].y][stack[i].x]) {
-				min = map[stack[i].y][stack[i].x];
-				min_i = i;
-			}
-		}
-
-		Point temp;
-		copy_point(stack[min_i] , temp);
-		copy_point(stack[front],stack[min_i]);
-		copy_point(temp,stack[front]);
-	}
-
-
-
-	return -1;
-}
-
-int main()
+int main(void)
 {
+	int N = 1;
 #ifdef FREOPEN
-	freopen("미로.txt" , "r" , stdin);
+	freopen("건물세우기.txt" , "r" , stdin);
+	scanf("%d" , &N);
 #endif // FREOPEN
-	int N = 3;
-	for(int testcase = 0; testcase<N; testcase++) {
-		int xsize; scanf("%d" , &xsize);
-		int ysize; scanf("%d" , &ysize);
-		printf("%d\n" , cal_main(xsize,ysize));
+	for(int i = 0; i<N; i++) {
+
+		int size; scanf("%d" , &size);
+		int out = cal_main(size);
+
+		printf("%d\n" , out);
+#ifdef FREOPEN
+		printf("-----------------------\n");
+#endif // FREOPEN
 	}
 
 	return 0;
