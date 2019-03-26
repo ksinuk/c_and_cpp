@@ -2,67 +2,62 @@
 //#define DEBUG
 #include <iostream>
 
-inline void swap(int &a , int &b) {
-	int temp = a;
-	a = b;
-	b = temp;
-}
+class Ham {
+public:
+	int l , w;
+	int start , last;
+	Ham(int inl=0, int inw=0 , int instart=0 , int inlast=0 ) {
+		l = inl , w = inw;
+		start = instart , last = inlast;
+	}
+
+	bool operator>(Ham a) {
+		if(l>=a.l && w>=a.w) return true;
+		return false;
+	}
+	bool operator<(Ham a) {
+		if(l<=a.l && w<=a.w) return true;
+		return false;
+	}
+	bool operator==(Ham a) {
+		if(l==a.l && w==a.w) return true;
+		return false;
+	}
+	Ham operator=(Ham a) {
+		l = a.l , w=a.w , start=a.start , last = a.last;
+		return *this;
+	}
+};
+Ham hams[5000];
 
 int cal_main(int size) {
-	int map[10][10] = {0};
-	int stack[10] = {0};
-	int history[10] = {0};
-	int sum[10] = {0};
-	
-
-	for(int y = 0; y<size; y++)
-		for(int x = 0; x<size; x++) scanf("%d" , &map[y][x]);
-
-	int min = 0;
-	for(int i = 0; i<size; i++) min += map[i][i];
-
-	for(int i = 0; i<size; i++) {
-		stack[i] = i;
-		history[i] = i;
+	for(int i=0; i<size; i++) {
+		int l , w;
+		scanf("%d %d" , &l , &w);
+		hams[i] = Ham(l , w , 0 , size-1);
 	}
-	int index = 0;
-	
 
-	while(index>=0) {
-		sum[index] = map[index][stack[index]]+((index==0) ? 0 : sum[index-1]);
-		if(index==size-1) {
-			min = (sum[index]<min) ? sum[index] : min;
-		}
-
-		if(index!=size-1&&sum[index]<=min) {
-			index++;
-		}
-		else {
-			while(index>=0&&history[index]==size-1) {
-				swap(stack[index] , stack[history[index]]);
-				history[index--] = index;
+	int cnt=0;
+	for(int i=0;i<size-1;i++)
+		for(int j=i+1; j<size; j++) {
+			if(hams[i]<hams[j] || hams[i]>hams[j]) {
+				cnt++;
+				break;
 			}
-			if(index<0) break;
-
-			swap(stack[index] , stack[history[index]]);
-			history[index]++;
-			swap(stack[index] , stack[history[index]]);
 		}
-	}
 
-	return min;
+	return size-cnt;
 }
 
-int main(void)
-{
+int main(void) {
 	int N = 1;
 #ifdef FREOPEN
-	freopen("건물세우기.txt" , "r" , stdin);
+	freopen("소시지_공장.txt" , "r" , stdin);
 	scanf("%d" , &N);
 #endif // FREOPEN
 	for(int i = 0; i<N; i++) {
-
-		int size; scanf("%d" , &size);
+		int size; 
+		scanf("%d" , &size);
 		int out = cal_main(size);
 
 		printf("%d\n" , out);

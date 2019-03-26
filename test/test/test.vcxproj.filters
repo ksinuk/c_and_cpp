@@ -13,80 +13,95 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="리소스 파일\해결 목록">
+      <UniqueIdentifier>{11cce09b-98f7-4e22-9d99-89bf6d64ac9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\완료 코드">
+      <UniqueIdentifier>{4bff2ebf-358d-41b2-832b-99ae77262587}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="최소 비용으로 포장 다시 하기.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="숫자 찾기.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="숫자 카운팅.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="sort.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="도약.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="예산.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="단지_번호붙이기.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="주사위_던지기2.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="최소의_합.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="건물세우기.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="더하기.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\완료 코드</Filter>
     </ClCompile>
     <ClCompile Include="건물세우기_재귀.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="나무_자르기.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="단지_번호붙이기.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="더하기.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="도약.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="숫자 찾기.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="숫자 카운팅.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="예산.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="주사위_던지기2.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="최소 비용으로 포장 다시 하기.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
+    </ClCompile>
+    <ClCompile Include="최소의_합.cpp">
+      <Filter>소스 파일\완료 코드</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="최소비용으로포장다시하기_input.txt">
-      <Filter>리소스 파일</Filter>
+    <Text Include="건물세우기.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
     </Text>
-    <Text Include="숫자 찾기.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="숫자 카운팅.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="도약.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="예산.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="미로.txt">
-      <Filter>리소스 파일</Filter>
+    <Text Include="나무_자르기.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
     </Text>
     <Text Include="단지_번호붙이기.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="주사위_던지기2.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="최소의_합.txt">
-      <Filter>리소스 파일</Filter>
-    </Text>
-    <Text Include="건물세우기.txt">
-      <Filter>리소스 파일</Filter>
+      <Filter>리소스 파일\해결 목록</Filter>
     </Text>
     <Text Include="더하기.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="도약.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="미로.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="숫자 찾기.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="숫자 카운팅.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="예산.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="주사위_던지기2.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="최소비용으로포장다시하기_input.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="최소의_합.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="소시지_공장.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>
