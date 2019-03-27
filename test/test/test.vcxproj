@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sort.cpp" />
+    <ClCompile Include="temp.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="건물세우기.cpp" />
     <ClCompile Include="건물세우기_재귀.cpp" />

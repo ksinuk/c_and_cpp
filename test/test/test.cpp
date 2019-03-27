@@ -6,7 +6,7 @@ class Ham {
 public:
 	int l , w;
 	int start , last;
-	Ham(int inl=0, int inw=0 , int instart=0 , int inlast=0 ) {
+	Ham(int inl = 0 , int inw = 0 , int instart = 0 , int inlast = 0) {
 		l = inl , w = inw;
 		start = instart , last = inlast;
 	}
@@ -19,34 +19,57 @@ public:
 		if(l<=a.l && w<=a.w) return true;
 		return false;
 	}
-	bool operator==(Ham a) {
-		if(l==a.l && w==a.w) return true;
-		return false;
-	}
 	Ham operator=(Ham a) {
-		l = a.l , w=a.w , start=a.start , last = a.last;
+		l = a.l , w = a.w , start = a.start , last = a.last;
 		return *this;
 	}
 };
 Ham hams[5000];
 
-int cal_main(int size) {
-	for(int i=0; i<size; i++) {
+inline void swap(Ham &a , Ham &b) {
+	Ham temp = a;
+	a = b;
+	b = temp;
+}
+
+int cal_main(int size_in) {
+	int size = 0;
+	for(int i = 0; i<size_in; i++) {
 		int l , w;
 		scanf("%d %d" , &l , &w);
-		hams[i] = Ham(l , w , 0 , size-1);
+
+		int ok = 1;
+		for(int j = 0; j<size; j++) if(hams[j].l==l && hams[j].w==w) { ok = 0; break; }
+		if(ok) hams[size++] = Ham(l , w , 0 , size_in-1);
+	}
+	for(int i = 0; i<size; i++) hams[i].last = size-1;
+	for(int i = 0; i<size; i++)
+		for(int j = 0; j<size; j++) {
+			if(i==j) continue;
+			else if(hams[i]<hams[j]) hams[i].last--;
+			else if(hams[i]>hams[j]) hams[i].start++;
+		}
+	for(int i = 1; i<size; i++) {
+		for(int j = i; j>0; j--) {
+			if(hams[j].start<hams[j-1].start||hams[j].start==hams[j-1].start && hams[j].last<hams[j-1].last) swap(hams[j-1] , hams[j]);
+		}
 	}
 
-	int cnt=0;
-	for(int i=0;i<size-1;i++)
-		for(int j=i+1; j<size; j++) {
-			if(hams[i]<hams[j] || hams[i]>hams[j]) {
-				cnt++;
-				break;
+	int cnt = 0;
+	for(int i = 0; i<size; i++) {
+		int now = i;
+		if(hams[now].start<0) continue;
+		cnt++;
+
+		for(int j = now+1; j<size; j++) {
+			if(hams[j]>hams[now]) {
+				hams[j].start = -1;
+				now = j;
 			}
 		}
+	}
 
-	return size-cnt;
+	return cnt;
 }
 
 int main(void) {
@@ -56,7 +79,7 @@ int main(void) {
 	scanf("%d" , &N);
 #endif // FREOPEN
 	for(int i = 0; i<N; i++) {
-		int size; 
+		int size;
 		scanf("%d" , &size);
 		int out = cal_main(size);
 
@@ -68,14 +91,3 @@ int main(void) {
 
 	return 0;
 }
-
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.

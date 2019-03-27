@@ -63,6 +63,9 @@
     <ClCompile Include="최소의_합.cpp">
       <Filter>소스 파일\완료 코드</Filter>
     </ClCompile>
+    <ClCompile Include="temp.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="건물세우기.txt">
