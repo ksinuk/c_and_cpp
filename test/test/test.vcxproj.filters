@@ -105,6 +105,9 @@
       <Filter>리소스 파일\해결 목록</Filter>
     </Text>
     <Text Include="소시지_공장.txt">
+      <Filter>리소스 파일\해결 목록</Filter>
+    </Text>
+    <Text Include="장기.txt">
       <Filter>리소스 파일</Filter>
     </Text>
   </ItemGroup>

@@ -186,6 +186,7 @@
     <Text Include="숫자 찾기.txt" />
     <Text Include="숫자 카운팅.txt" />
     <Text Include="예산.txt" />
+    <Text Include="장기.txt" />
     <Text Include="주사위_던지기2.txt" />
     <Text Include="최소비용으로포장다시하기_input.txt" />
     <Text Include="최소의_합.txt" />
