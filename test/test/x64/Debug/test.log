@@ -1,7 +1,9 @@
 ﻿  sort.cpp
+  temp.cpp
   test.cpp
   건물세우기.cpp
   건물세우기_재귀.cpp
+  나무_자르기.cpp
   단지_번호붙이기.cpp
   더하기.cpp
   도약.cpp
@@ -12,4 +14,5 @@
   최소 비용으로 포장 다시 하기.cpp
   최소의_합.cpp
   코드를 생성하고 있습니다...
-  test.vcxproj -> C:\Users\student\Desktop\c_cpp\test\x64\Debug\test.exe
+  LINK : C:\Users\ghttt\Desktop\c_cpp\test\x64\Debug\test.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  test.vcxproj -> C:\Users\ghttt\Desktop\c_cpp\test\x64\Debug\test.exe
