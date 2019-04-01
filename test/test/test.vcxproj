@@ -183,6 +183,7 @@
     <ClCompile Include="주사위_던지기2.cpp" />
     <ClCompile Include="최소 비용으로 포장 다시 하기.cpp" />
     <ClCompile Include="최소의_합.cpp" />
+    <ClCompile Include="치킨배달2.cpp" />
     <ClCompile Include="테이프_이어_붙이기.cpp" />
     <ClCompile Include="토마토.cpp" />
     <ClCompile Include="파이프_제거.cpp" />
@@ -213,6 +214,7 @@
     <Text Include="책꽃이.cpp" />
     <Text Include="최소비용으로포장다시하기_input.txt" />
     <Text Include="최소의_합.txt" />
+    <Text Include="치킨배달2.txt" />
     <Text Include="테이프_이어_붙이기.txt" />
     <Text Include="토마토.txt" />
     <Text Include="파이프_제거.txt" />
