@@ -169,12 +169,17 @@
     <ClCompile Include="단지_번호붙이기.cpp" />
     <ClCompile Include="더하기.cpp" />
     <ClCompile Include="도약.cpp" />
+    <ClCompile Include="도자기.cpp" />
+    <ClCompile Include="로봇_과자_먹기.cpp" />
     <ClCompile Include="미술관람_대회.cpp" />
+    <ClCompile Include="상자_포장하기.cpp" />
     <ClCompile Include="숫자 찾기.cpp" />
     <ClCompile Include="숫자 카운팅.cpp" />
+    <ClCompile Include="양팔저울.cpp" />
     <ClCompile Include="예산.cpp" />
     <ClCompile Include="자동차경주대회.cpp" />
     <ClCompile Include="장기.cpp" />
+    <ClCompile Include="주사위_던지기1.cpp" />
     <ClCompile Include="주사위_던지기2.cpp" />
     <ClCompile Include="최소 비용으로 포장 다시 하기.cpp" />
     <ClCompile Include="최소의_합.cpp" />
@@ -185,7 +190,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="N_QUEEN.txt" />
+    <Text Include="도자기.txt" />
+    <Text Include="로봇_과자_먹기.txt" />
     <Text Include="미술관람_대회.txt" />
+    <Text Include="상자_포장하기.txt" />
     <Text Include="소시지_공장.txt" />
     <Text Include="건물세우기.txt" />
     <Text Include="나무_자르기.txt" />
@@ -195,9 +203,11 @@
     <Text Include="미로.txt" />
     <Text Include="숫자 찾기.txt" />
     <Text Include="숫자 카운팅.txt" />
+    <Text Include="양팔저울.txt" />
     <Text Include="예산.txt" />
     <Text Include="자동차경주대회.txt" />
     <Text Include="장기.txt" />
+    <Text Include="주사위_던지기1.txt" />
     <Text Include="주사위_던지기2.txt" />
     <Text Include="책꽂이.txt" />
     <Text Include="책꽃이.cpp" />
