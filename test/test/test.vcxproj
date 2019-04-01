@@ -165,12 +165,14 @@
     <ClCompile Include="test.cpp" />
     <ClCompile Include="건물세우기.cpp" />
     <ClCompile Include="건물세우기_재귀.cpp" />
+    <ClCompile Include="기업투자.cpp" />
     <ClCompile Include="나무_자르기.cpp" />
     <ClCompile Include="단지_번호붙이기.cpp" />
     <ClCompile Include="더하기.cpp" />
     <ClCompile Include="도약.cpp" />
     <ClCompile Include="도자기.cpp" />
     <ClCompile Include="로봇_과자_먹기.cpp" />
+    <ClCompile Include="미사일.cpp" />
     <ClCompile Include="미술관람_대회.cpp" />
     <ClCompile Include="상자_포장하기.cpp" />
     <ClCompile Include="숫자 찾기.cpp" />
@@ -191,8 +193,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="N_QUEEN.txt" />
+    <Text Include="기업투자.txt" />
     <Text Include="도자기.txt" />
     <Text Include="로봇_과자_먹기.txt" />
+    <Text Include="미사일.txt" />
     <Text Include="미술관람_대회.txt" />
     <Text Include="상자_포장하기.txt" />
     <Text Include="소시지_공장.txt" />
