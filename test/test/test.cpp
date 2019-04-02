@@ -1,56 +1,67 @@
 ﻿#define FREOPEN
 #include <iostream>
 
-int cal_main(int gold, int size) {
-	int table[31][7] ={0};
-	for(int i=0; i<gold; i++) {
-		int pay; scanf("%d" , &pay);
-		for(int j=0; j<size; j++) {
-			scanf("%d" , &table[pay][j]);
-		}
-	}
-	//-------------------------------
-	int arr[7]={0};
-	int index=0;
-	int max=0;
-	int sum[8]={0};
-	int out[8]={0};
+int dy[4] = {0,-1,0,1};
+int dx[4] = {1,0,-1,0};
 
-	while(index>=0) {
-		if(index==size-1) {
-			arr[index] = gold-sum[index];
-			out[index+1] = table[arr[index]][index] + out[index];
-			max = (max>out[index+1]) ? max : out[index+1];
+struct Robot {
+	int y , x , arrow;
+};
+Robot qu[40005];
+int map[100][100];
 
-			arr[index--] = 0;
-			arr[index]++;
-			while(index>=0 && arr[index]>=gold-sum[index]) {
-				arr[index--] = 0;
-				if(index>=0) arr[index]++;
-			}
-			continue;
-		}
-		sum[index+1] = sum[index] + arr[index];
-		out[index+1] = table[arr[index]][index]+out[index];
-		index++;
-
-	}
-
-	return max;
+inline void swap(int &a , int &b) {
+	int temp = a;
+	a = b;
+	b = temp;
 }
+
+int cal_main(int ysize , int xsize) {
+	for(int y = 0; y<ysize; y++) {
+		for(int x = 0; x<xsize; x++) {
+			scanf("%d" , &map[y][x]);
+		}
+	}
+	Robot start; scanf("%d %d %d" , &start.y , &start.x , &start.arrow);
+	Robot last; scanf("%d %d %d" , &last.y , &last.x , &last.arrow);
+
+	qu[0] = start;
+	map[start.y][start.x] = 1;
+	int front=0 , end=1;
+
+	while(end-front>0) {
+		Robot now = qu[front++];
+
+		for(int arrow = 0; arrow<4; arrow++) {
+			Robot next = {now.y+dy[arrow] , now.x+dx[arrow]};
+			if(next.x<0||next.y<0||next.y>=ysize||next.x>=xsize) continue;
+			if(map[next.y][next.x]!=0) continue;
+
+			int commend = (arrow > now.arrow) ? arrow-now.arrow : now.arrow-arrow;
+			if(commend==3) commend = 1;
+
+			next.arrow = arrow;
+
+		}
+	}
+
+
+	return 0;
+}
+
 
 int main() {
 	int N = 1;
 #ifdef FREOPEN
-	freopen("기업투자.txt" , "r" , stdin);
+	freopen("로봇.txt" , "r" , stdin);
 	scanf("%d" , &N);
 #endif // FREOPEN
-	
+	//scanf("%d" , &N);
+
 	for(int i = 0; i<N; i++) {
-		int gold,company;
-		scanf("%d %d" , &gold, &company);
-		//cal_main(size);
-		printf("%d\n" , cal_main(gold,company));
+		int ysize , xsize;
+		scanf("%d %d" , &ysize , &xsize);
+		cal_main(ysize , xsize);
 	}
 
 	return 0;
