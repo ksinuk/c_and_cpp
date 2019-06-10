@@ -26,6 +26,8 @@ int cal_main() {
 		int dx[4] = {1,-1,0,0};
 		int ok = 0;
 		for(int d=first_d; d<4; d++){
+			history[y][x]++;
+
 			int yy = y+dy[d];
 			int xx = x+dx[d];
 			if(yy<0 || xx<0 || yy>=size_y || xx>=size_x)continue;
@@ -39,7 +41,6 @@ int cal_main() {
 			stack[index][1] = xx;
 			stack[index][2] = cnt+1;
 
-			history[y][x]++;
 			break;
 		}
 
