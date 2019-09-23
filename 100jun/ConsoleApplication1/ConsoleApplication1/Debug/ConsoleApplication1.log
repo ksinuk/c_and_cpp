@@ -1,0 +1,8 @@
+﻿  ConsoleApplication1.cpp
+c:\users\multicampus\desktop\바탕화면 정리\c_and_cpp\100jun\consoleapplication1\consoleapplication1\consoleapplication1.cpp(9): warning C4244: 'return': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\multicampus\desktop\바탕화면 정리\c_and_cpp\100jun\consoleapplication1\consoleapplication1\consoleapplication1.cpp(11): warning C4244: 'return': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\multicampus\desktop\바탕화면 정리\c_and_cpp\100jun\consoleapplication1\consoleapplication1\consoleapplication1.cpp(24): warning C4477: 'scanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 '__int64 *'입니다.
+  c:\users\multicampus\desktop\바탕화면 정리\c_and_cpp\100jun\consoleapplication1\consoleapplication1\consoleapplication1.cpp(24): note: 서식 문자열에서 '%lld'을(를) 사용하는 것이 좋습니다.
+  c:\users\multicampus\desktop\바탕화면 정리\c_and_cpp\100jun\consoleapplication1\consoleapplication1\consoleapplication1.cpp(24): note: 서식 문자열에서 '%I64d'을(를) 사용하는 것이 좋습니다.
+c:\users\multicampus\desktop\바탕화면 정리\c_and_cpp\100jun\consoleapplication1\consoleapplication1\consoleapplication1.cpp(32): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ConsoleApplication1.vcxproj -> C:\Users\multicampus\Desktop\바탕화면 정리\c_and_cpp\100jun\ConsoleApplication1\Debug\ConsoleApplication1.exe
